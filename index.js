@@ -1,9 +1,7 @@
 const express = require("express");
-const { default: inquirer } = require("inquirer");
+const inquirer = require("inquirer"); // Use the default import without destructuring
 // Import and require Pool (node-postgres)
-// We'll be creating a Connection Pool. Read up on the benefits here: https://node-postgres.com/features/pooling
 const { Pool } = require("pg");
-
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -13,52 +11,48 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 // Connect to database
-const pool = new Pool(
-  {
-    // TODO: Enter PostgreSQL username
-    user: "postgres",
-    // TODO: Enter PostgreSQL password
-    password: "P@nther1$",
-    host: "localhost",
-    database: "employee_tracker_db",
-  },
-  console.log(`Connected to the books_db database.`)
-);
+const pool = new Pool({
+  user: "postgres",
+  password: "P@nther1$",
+  host: "localhost",
+  database: "employee_tracker_db",
+});
 
-pool.connect();
+pool.connect((err, client, release) => {
+  if (err) {
+    return console.error('Error acquiring client', err.stack);
+  }
+  console.log(`Connected to the employee_tracker_db database.`);
+});
 
 function startTasks() {
-inquirer
-  .prompt([
-    {
-      type: "Choice",
-      Messsge: "What would you like to work on?",
-      choices: [
-        "View All Departments",
-        "View All Roles",
-        "View All EMPLOYEES",
-        "Add A DEPARTMENT",
-        "ADD A ROLE",
-        "ADD AN EMPLOYEE",
-        "UPDATE AN EMPLOYEE ROLE",
-      ],
-    }
-  ])
-  .then((output) => {
-    // Destructure the user input from the output object
-       console.log(output)});
-  }
-  
+  inquirer
+    .prompt([
+      {
+        type: "list", // Corrected the type
+        name: "task", // Added a name for the prompt
+        message: "What would you like to work on?", // Corrected the message
+        choices: [
+          "View All Departments",
+          "View All Roles",
+          "View All Employees",
+          "Add a Department",
+          "Add a Role",
+          "Add an Employee",
+          "Update an Employee Role",
+          "Exit"
+        ],
+      },
+    ])
+    .then((output) => {
+      // Destructure the user input from the output object
+      console.log(output);
+    });
+}
 
-    // WHEN I choose to view all departments
-    // THEN I am presented with a formatted table showing department names and department ids
-pool.query(`SELECT department.department_name department.id FROM department`, 
-    //     (err, {rows}) => {
-    //     if (err) {
-    //       console.log(err);
-    //     }
-    //     console.log(rows);
-    //   }
-    );
+// Starting the tasks
+startTasks();
 
-startTasks()
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
