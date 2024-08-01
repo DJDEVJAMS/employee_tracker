@@ -44,11 +44,38 @@ function startTasks() {
         ],
       },
     ])
-    .then((output) => {
+    .then((data) => {
       // Destructure the user input from the output object
-      console.log(output);
-    });
-}
+      console.log(data);
+      switch  (data.choices) {
+      case  "VIEW ALL DEPARTMENTS":
+        console.log("VIEW ALL DEPARTMENTS");
+    break;
+        case "VIEW ALL ROLES":
+        console.log("VIEW ALL ROLES");
+        break;
+        case "VIEW ALL EMPLOYEES":
+            console.log("VIEW ALL EMPLOYEES");
+            break;
+        case "ADD A DEPARTMENT":
+            console.log("ADD A DEPARTMENT");
+            break;
+            case "ADD A ROLE":
+            console.log("ADD A ROLE");
+            break;
+        case "ADD AN EMPLOYEEE":
+            console.log("ADD AN EMPLOYEE");
+            break;
+            case "UPDATE AN EMPLOYEE ROLE":
+                console.log("UPDATE AN EMPLOYEE ROLE"); 
+                break;
+                case "Exit":
+                    console.log("Exit")
+                    break;
+     )
+        
+    };
+
 
 // Starting the tasks
 startTasks();
