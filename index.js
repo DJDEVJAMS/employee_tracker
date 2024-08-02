@@ -35,7 +35,7 @@ function addDepartment() {
 
       type:"input",
       name:"idDepot",
-      message:"Enter the new department name.",
+      message:"Enter the new department id.",
 
     }
   ])
@@ -53,17 +53,66 @@ function addRole() {
   .prompt([
     {
       type:"input",
-      name:"addDept",
-      message:"Enter the new department name.",
+      name:"title",
+      message:"Enter the new title name.",
+
+      type:"input",
+      name:"salary",
+      message:"Enter the new role salary.",
 
       type:"input",
       name:"idDepot",
-      message:"Enter the new department name.",
+      message:"Enter the new role department id.",
 
     }
   ])
-  .then((newRole) => 
-};
+  .then((newRole) => { 
+    console.log(`Building new Role "${newRole.title}".`);
+    const query = `INSERT INTO role_tb VALUES ("${newRole.title}","${newRole.salary}","${newRole.idDepot}")` 
+    ;
+
+function addEmployee() {
+  inquirer
+  .prompt([
+    {
+    type:"input",
+    name:"first",
+    message: "Enter employee's First Name.",
+
+    type:"input",
+    name:"last",
+    message: "Enter employee's Last Name.",
+    
+    type:"input",
+    name:"roleId",
+    message:"Enter emplyee's Role ID.",
+
+    type:"input",
+    name:"manId",
+    message:"Enter emplyee's Manager ID.",
+
+    }
+  ])
+  .then((newEmp) => { 
+    console.log(`Building new Employee "${newEmp.first}" "${newEmp.last}".`);
+    const query = `INSERT INTO employee_tb VALUES ("${newEmp.first}","${newEmp.last}","${newEmp.roleId},"${newEmp.manID}")` 
+    ;
+}
+
+function updateEmpoyeeRole() {
+  inquirer
+  .prompt([
+    {
+    type:"input",
+    name:"id",
+    message: "Enter employee's First Name.",
+    }
+  ])
+  .then((role) => { 
+    console.log(`Updating Employee "${newEmp.first}" "${newEmp.last}" role.`);
+    const query = `UPDATE employee_tb VALUES ("${update.id}")` 
+    ;
+}
 
 function exit() {
   inquirer
