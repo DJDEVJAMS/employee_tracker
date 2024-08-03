@@ -33,7 +33,8 @@ All inquiaries are applied to the README.md : Verified ✅
 
 All text is ledgible. : Verified ✅
 
-The following image shows the web application's appearance and functionality:
+The following image shows the application's appearance and functionality:
+
 <img src="/images/employee_tracker.gif">
 
 ## Questions
