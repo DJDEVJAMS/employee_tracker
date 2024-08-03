@@ -1,4 +1,4 @@
-# # Employee Tracker
+# Employee Tracker
 
 ## Description
 A ccontent managemetn system (CMS) to help allow users to easily view and interact with inforamton stored in databases.
